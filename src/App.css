@@ -1,5 +1,16 @@
 .App {
   text-align: center;
+  height: 100%;
+}
+
+.app-container {
+  height: 100vh;
+  text-align: center;
+  background-position: top center;
+  background-size: cover;
+  background-repeat: repeat;
+  background-image: url("./assets/img/solution-background.png");
+  background-color: #f7f7f7;
 }
 
 .App-logo {
@@ -32,26 +43,102 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
 
+
+/* Header Styles */
+.header {
+  background-color: rgba(0, 0, 0, .9);
+  width: calc(3em + 16vw);
+  border-bottom-right-radius: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+}
+
+.header img {
+  max-width: 100%;
+  height: auto;
+  padding: 20px;
+}
+
+/* EmployeeList Styles */
+.home {
+  height: 100%;
+}
+
+.employee-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.employee-table {
+  overflow: auto;
+  width: 80%;
+  max-width: 800px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+
+}
+
+.add-button:hover {
+  background-color: #45a049;
+}
+
+.add-button svg {
+  margin-right: 8px;
+}
+
+.add-button span {
+  font-weight: bold;
+}
+
 /* Table Styles */
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 20px;
 }
 
 thead th {
-  background-color: #f0f0f0;
+  background-color: #fff;
   border-bottom: 2px solid #ccc;
-  padding: 8px;
+  padding: 8px 8px 8px 8px;
   text-align: center;
 }
 
+thead tr:first-child {
+  font-size: 18px;
+}
+
 tbody td {
+  background-color: #fff;
   border-bottom: 1px solid #ccc;
   padding: 8px;
   text-align: center;
@@ -59,21 +146,85 @@ tbody td {
 
 tbody tr:last-child td {
   border-bottom: none;
+  padding-bottom: 10px;
 }
 
-/* Hover Styles */
 tbody tr:hover {
-  background-color: #f5f5f5;
+  background-color: #f0f0f0;
 }
 
-/* Responsive Styles */
 @media (max-width: 768px) {
   table {
     font-size: 14px;
   }
-  
+
   thead th,
   tbody td {
     padding: 6px;
   }
+}
+
+/* AddEmployee Styles */
+.add-employee {
+  padding-top: 10px;
+}
+
+.employee-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 25px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.employee-form .form-group {
+  padding: 20px 20px 5px 5px;
+}
+
+.employee-form label {
+  display: block;
+  font-weight: normal;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.employee-form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.employee-form button {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #4285f4;
+  color: #fff;
+  cursor: pointer;
+}
+
+.employee-form button:hover {
+  background-color: #3367d6;
+}
+
+.employee-form .form-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px 5px 5px;
+
+}
+
+.employee-form a {
+  color: #f44242;
+  text-decoration: none;
+}
+
+.employee-form a:hover {
+  text-decoration: underline;
 }
