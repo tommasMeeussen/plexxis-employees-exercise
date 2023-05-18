@@ -16,3 +16,6 @@ For this exercise, I decided to expand my skills by utilizing PostgreSQL as the 
 - [X] Implement UI mechanisms to edit/update employee data.
 - [X] Add API endpoint(s) for updating employee data.
 - [X] Utilize React Table for displaying the employees in the React application.
+
+## Application Functionality Overview
+<img width="1680" alt="image" src="https://github.com/tommasMeeussen/plexxis-employees-exercise/assets/46820380/eeed97e6-d596-4e10-bbfa-fec0516316ae">
