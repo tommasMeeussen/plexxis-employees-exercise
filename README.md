@@ -4,13 +4,13 @@ This repository contains the code for the PLEXXIS Interview Exercise, which is a
 
 ## Requirements
 - [X] Create a CRUD application that retrieves employees from a REST API.
-- [ ] Display the employees in a React application.
-- [ ] Implement UI mechanisms for creating and deleting employees.
-- [ ] Implement API endpoints for creating and deleting employees.
+- [X] Display the employees in a React application.
+- [X] Implement UI mechanisms for creating and deleting employees.
+- [X] Implement API endpoints for creating and deleting employees.
 - [ ] Edit the README.md file to provide an explanation of the project, your efforts, and other relevant information.
 
 ## Bonus Objectives
-- [ ] Use a relational database (SQLite, MariaDB, Postgres) to store the employee data.
-- [ ] Implement UI mechanisms to edit/update employee data.
-- [ ] Add API endpoint(s) for updating employee data.
-- [ ] Utilize React Table for displaying the employees in the React application.
+- [X] Use a relational database (SQLite, MariaDB, Postgres) to store the employee data.
+- [X] Implement UI mechanisms to edit/update employee data.
+- [X] Add API endpoint(s) for updating employee data.
+- [X] Utilize React Table for displaying the employees in the React application.
