@@ -118,16 +118,16 @@ export default function EditEmployee() {
                                 <option value="">Select branch</option>
                                 <option value="Abacus">Abacus</option>
                                 <option value="Chatterton">Chatterton</option>
+                                <option vlaue="Pillsworth">Pillsworth</option>
                             </select>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="assigned">Assigned</label>
-                            <input
-                                name="isGoing"
+                            <label htmlFor="assigned">Assigned: <input
+                                name="isAssigned"
                                 type="checkbox"
                                 checked={assigned}
                                 onChange={(e) => setAssigned(e.target.checked ? 1 : 0)}
-                            />
+                            /></label>
                         </div>
                         {formError && <div className="error-message">{formError}</div>}
                         <div className="form-actions">
