@@ -3,7 +3,7 @@
 This repository contains the code for the PLEXXIS Interview Exercise, which is a CRUD application built with React. The application interacts with a REST API to retrieve employee data and provides a user-friendly interface for managing employees.
 
 ## Requirements
-- [ ] Create a CRUD application that retrieves employees from a REST API.
+- [X] Create a CRUD application that retrieves employees from a REST API.
 - [ ] Display the employees in a React application.
 - [ ] Implement UI mechanisms for creating and deleting employees.
 - [ ] Implement API endpoints for creating and deleting employees.
