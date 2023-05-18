@@ -1,3 +1,4 @@
+//conect to local postgresql db
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'my_user',
@@ -7,6 +8,7 @@ const pool = new Pool({
   port: 5432,
 });
 
+//retrieve all employees from employee table in db
 const getEmployees = (body) => {
   return new Promise(function (resolve, reject) {
     pool.query('SELECT * FROM employee ORDER BY id ASC', (error, results) => {
@@ -17,12 +19,14 @@ const getEmployees = (body) => {
     })
   })
 }
+
+//add a new employee to db
 const addEmployee = (body) => {
   return new Promise(function (resolve, reject) {
-    const { name, code, profession, color, city, branch, assigned } = body;
+    const { name, code, profession, sketchPickerColor, city, branch, assigned } = body;
     pool.query(
       'INSERT INTO employee (name, code, profession, color, city, branch, assigned) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
-      [name, code, profession, color, city, branch, assigned],
+      [name, code, profession, sketchPickerColor, city, branch, assigned],
       (error, results) => {
         if (error) {
           reject(error);
@@ -33,7 +37,7 @@ const addEmployee = (body) => {
   });
 };
 
-
+//Edit employee information
 const editEmployee = (body) => {
   return new Promise(function (resolve, reject) {
     const { id, name, code, profession, color, city, branch, assigned } = body;
@@ -50,6 +54,7 @@ const editEmployee = (body) => {
   });
 };
 
+//Remove employee from db
 const deleteEmployee = (id) => {
   return new Promise(function (resolve, reject) {
     //const id = parseInt(request.params.id);

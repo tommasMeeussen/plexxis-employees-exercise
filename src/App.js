@@ -1,19 +1,24 @@
 import './App.css';
 import EmployeeList from './views/EmployeeList';
 import AddEmployee from './views/AddEmployee';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import EditEmployee from './views/EditEmployee';
+import { GlobalProvider } from './context/GlobalState';
+
+
 
 
 function App() {
   return (
-    <div class="app-container">
+    <div className="app-container">
       <Router>
-        <Routes>
-          <Route path="/" element={<EmployeeList />} exact />
-          <Route path="/add" element={<AddEmployee />} exact />
-          <Route path="/editemployee" element={<EditEmployee />} exact />
-        </Routes>
+        <GlobalProvider>
+          <Routes>
+            <Route path="/" element={<EmployeeList />} exact />
+            <Route path="/add" element={<AddEmployee />} exact />
+            <Route path="/editemployee" element={<EditEmployee />} exact />
+          </Routes>
+        </GlobalProvider>
       </Router>
     </div>
   );

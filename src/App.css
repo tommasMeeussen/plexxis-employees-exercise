@@ -3,14 +3,17 @@
   height: 100%;
 }
 
-.app-container {
-  height: 100vh;
-  text-align: center;
+html {
   background-position: top center;
   background-size: cover;
   background-repeat: repeat;
   background-image: url("./assets/img/solution-background.png");
   background-color: #f7f7f7;
+}
+
+.app-container {
+  height: 100%;
+  text-align: center;
 }
 
 .App-logo {
@@ -167,6 +170,7 @@ tbody tr:hover {
 /* AddEmployee Styles */
 .add-employee {
   padding-top: 10px;
+  margin-bottom: 20px;
 }
 
 .employee-form {
@@ -189,12 +193,32 @@ tbody tr:hover {
   text-align: left;
 }
 
+.employee-form select,
 .employee-form input[type="text"] {
   width: 100%;
   padding: 10px;
   font-size: 14px;
   border-radius: 4px;
   border: 1px solid #ccc;
+  box-sizing: content-box;
+}
+
+.employee-form .color-picker {
+  width: 20em !important;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.error-message {
+  color: darkred;
+}
+
+.employee-form .color-picker-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .employee-form button {
