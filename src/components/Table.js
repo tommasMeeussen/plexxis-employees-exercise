@@ -32,11 +32,9 @@ export default function Table({ columns, data }) {
             <tr {...row.getRowProps()}>
               {row.cells.map(cell => {
                 const headerValue = cell.column.Header;
-
                 let cellStyle = {};
                 if (headerValue === "Color") {
                   const colorValue = cell.value ? cell.value : "white";
-                  console.log(colorValue);
                   cellStyle = {
                     backgroundColor: colorValue,
                     borderRadius: "50%",
