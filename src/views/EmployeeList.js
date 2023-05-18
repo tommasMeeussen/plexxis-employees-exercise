@@ -1,36 +1,33 @@
-import { useEffect, useState, useMemo } from "react";
-import React from 'react';
+import React, { useMemo, useContext, useCallback } from "react";
 import Table from "../components/Table";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import { GlobalContext } from '../context/GlobalState';
+
 
 export default function EmployeeList() {
   let navigate = useNavigate();
-  const [employeeData, setEmployeeData] = useState([]);
+  //const [employeeData, setEmployeeData] = useState([]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { employees, deleteEmployee } = useContext(GlobalContext);
 
-  const handleDelete = (id) => {
-    fetch(`http://localhost:8080/api/employee/${id}`, {
-      method: 'DELETE',
-    })
-      .then(response => {
-        return response.text();
+  //Table employee operations
+  const handleDelete = useCallback((id) => {
+    deleteEmployee(id)
+      .then(() => {
+        alert('Employee deleted successfully');
       })
-      .then(data => {
-        alert(data);
-        fetchData();
+      .catch((error) => {
+        console.error('Error deleting employee:', error);
       });
-  }
+  }, [deleteEmployee]);
 
-  const editEmployee = (employeeData) => {
+  const editEmployee = useCallback((employeeData) => {
     navigate('editemployee', {
       state: { employee: employeeData },
     });
-  }
+  }, [navigate]);
 
   const columns = useMemo(
     () => [
@@ -91,17 +88,6 @@ export default function EmployeeList() {
     [editEmployee, handleDelete]
   );
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch('http://localhost:8080/api/employee');
-      const data = await response.json();
-      setEmployeeData(data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
-
   return (
     <>
 
@@ -109,7 +95,7 @@ export default function EmployeeList() {
         <Header />
         <div className="employee-list">
           <div className="employee-table">
-            <Table columns={columns} data={employeeData} />
+            <Table columns={columns} data={employees} />
           </div>
           <Link to="/add" style={{ textDecoration: 'none' }}>
             <button className="add-button">

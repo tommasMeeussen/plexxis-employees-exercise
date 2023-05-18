@@ -4,12 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
+import { ChromePicker } from 'react-color';
+import { GlobalContext } from '../context/GlobalState';
+
+
 
 
 export default function EditEmployee() {
+    const { updateEmployee } = useContext(GlobalContext);
     const location = useLocation();
     const employee = location.state ? location.state.employee : null;
-
     const [id, setId] = useState('');
     const [name, setName] = useState('');
     const [code, setCode] = useState('');
@@ -18,11 +22,10 @@ export default function EditEmployee() {
     const [city, setCity] = useState('');
     const [branch, setBranch] = useState('');
     const [assigned, setAssigned] = useState(0);
-
-
-    //const { addEmployee, employees } = useContext(GlobalContext);
+    const [formError, setFormError] = useState('');
     let navigate = useNavigate();
 
+    //Get employee data to be displayed in form
     useEffect(() => {
         if (employee) {
             console.log(employee);
@@ -37,90 +40,106 @@ export default function EditEmployee() {
         }
     }, [employee]);
 
-    // const onSubmit = e => {
-    //     e.preventDefault();
-    //     const newEmployee = {
-    //         id: 1,
-    //         name,
-    //         location,
-    //         designation
-    //     }
-    //     addEmployee(newEmployee);
-    //     navigate("/");
-    // }
-
+    //Update employee form submit handler
     const onSubmit = e => {
         e.preventDefault();
-        fetch(`http://localhost:8080/api/employee/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: Number(id), name, code, profession, color, city, branch, assigned: Number(assigned) }),
-        })
-            .then(response => {
-                return response.text();
-            })
-            .then(data => {
-                alert(data);
-                navigate("/");
+
+        if (!name || !code || !profession || !city || !branch) {
+            setFormError('Please fill in all required fields');
+            return;
+        }
+        const updatedEmployee = { id, name, code, profession, color, city, branch, assigned: Number(assigned) }
+        updateEmployee(id, updatedEmployee)
+            .then(() => {
+                alert("Employee Updated successfully");
+                navigate('/');
             })
             .catch(error => {
-                console.error('Error updating employee:', error);
-                alert('Failed to update employee');
+                console.error("Error adding employee:", error);
             });
     };
 
     return (
         <>
             <Header />
-            <div className="employee-form">
-                <form onSubmit={onSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="name">Name of employee</label>
-                        <input
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            type="text"
-                            placeholder="Enter name"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="code">
-                            Code
-                        </label>
-                        <input value={code} onChange={(e) => setCode(e.target.value)} type="text" placeholder="Enter Code" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="profession">
-                            Profession
-                        </label>
-                        <input value={profession} onChange={(e) => setProfession(e.target.value)} type="text" placeholder="Enter profession" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="color">
-                            Color
-                        </label>
-                        <input value={color} onChange={(e) => setColor(e.target.value)} type="text" placeholder="Enter color" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="city">
-                            City
-                        </label>
-                        <input value={city} onChange={(e) => setCity(e.target.value)} type="text" placeholder="Enter city" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="branch">
-                            Branch
-                        </label>
-                        <input value={branch} onChange={(e) => setBranch(e.target.value)} type="text" placeholder="Enter branch" />
-                    </div>
-                    <div className="form-actions">
-                        <button>Edit Employee</button>
-                        <Link to="/">Cancel</Link>
-
-                    </div>
-                </form>
+            <div className="add-employee">
+                <div className="employee-form">
+                    <form onSubmit={onSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="name">Name of employee</label>
+                            <input
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                type="text"
+                                placeholder="Enter name"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="code">Code</label>
+                            <input
+                                value={code}
+                                onChange={(e) => setCode(e.target.value)}
+                                type="text"
+                                placeholder="Enter Code"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="profession">Profession</label>
+                            <input
+                                value={profession}
+                                onChange={(e) => setProfession(e.target.value)}
+                                type="text"
+                                placeholder="Enter profession"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="color">Color</label>
+                            <div className="color-picker-container">
+                                <ChromePicker
+                                    className="color-picker"
+                                    onChange={(color) => {
+                                        setColor(color.hex);
+                                    }}
+                                    color={color}
+                                ></ChromePicker>
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="city">City</label>
+                            <input
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
+                                type="text"
+                                placeholder="Enter city"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="branch">Branch</label>
+                            <select
+                                value={branch}
+                                onChange={(e) => setBranch(e.target.value)}
+                            >
+                                <option value="">Select branch</option>
+                                <option value="Abacus">Abacus</option>
+                                <option value="Chatterton">Chatterton</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="assigned">Assigned</label>
+                            <input
+                                name="isGoing"
+                                type="checkbox"
+                                checked={assigned}
+                                onChange={(e) => setAssigned(e.target.checked ? 1 : 0)}
+                            />
+                        </div>
+                        {formError && <div className="error-message">{formError}</div>}
+                        <div className="form-actions">
+                            <button type="submit">Update</button>
+                            <Link to="/">Cancel</Link>
+                        </div>
+                    </form>
+                </div>
             </div>
         </>
     );
