@@ -18,4 +18,17 @@ For this exercise, I decided to expand my skills by utilizing PostgreSQL as the 
 - [X] Utilize React Table for displaying the employees in the React application.
 
 ## Application Functionality Overview
+# Landing page
+Data is retrieved from PostgreSql DB and displayed on the landing page using react-table. Update and delete UI mechanisms are available for each employee in the table.
+Add employee button under table navigates to AddEmployee page
 <img width="1680" alt="image" src="https://github.com/tommasMeeussen/plexxis-employees-exercise/assets/46820380/eeed97e6-d596-4e10-bbfa-fec0516316ae">
+
+# Add Employee Page
+Form to input employee details. On Add Employee click a new employee is created and added to the DB  
+<img width="1680" alt="image" src="https://github.com/tommasMeeussen/plexxis-employees-exercise/assets/46820380/3a68f7b9-8d87-49e9-8a39-48b54f0f04ef">
+
+#Update Employee
+Update employee displays the employee form with selected user data filled out. On update button click the employee's information is updated in the DB 
+<img width="1678" alt="image" src="https://github.com/tommasMeeussen/plexxis-employees-exercise/assets/46820380/ded87008-2a6d-481f-8bf3-de4cea09acea">
+
+
