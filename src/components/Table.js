@@ -39,9 +39,13 @@ export default function Table({ columns, data }) {
                   console.log(colorValue);
                   cellStyle = {
                     backgroundColor: colorValue,
-                    borderRadius: "25px",
+                    borderRadius: "50%",
+                    height: "15px",
+                    width: "15px",
+                    display: "inline-block",
+
                   };
-                  return <td {...cell.getCellProps()} style={cellStyle}>{cell.render("Cell")}</td>;
+                  return <td {...cell.getCellProps()} >{cell.render("Cell")} <span style={cellStyle}></span></td>;
                 }
                 return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
               })}

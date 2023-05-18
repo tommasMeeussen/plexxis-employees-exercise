@@ -5,20 +5,19 @@ const employees = require('./data/employees.json');
 
 const employeeModel = require('./employeeModel')
 
-var corsOptions = {
+
+const corsOptions = {
   origin: 'http://localhost:3000',
-  optionsSuccessStatus: 200
-}
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: 'Content-Type, Access-Control-Allow-Headers'
+};
+
+app.use(cors(corsOptions))
+
 app.use(express.json())
 
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
-  next();
-});
-
-app.get('/api/employee', cors(corsOptions), (req, res) => {
+app.get('/api/employee', (req, res) => {
   employeeModel.getEmployees()
     .then(response => {
       res.status(200).send(response);
@@ -39,15 +38,12 @@ app.post('/api/employee', (req, res) => {
     })
 })
 
-app.put('/api/employee/:id', cors(corsOptions), (req, res) => {
+app.put('/api/employee/:id', (req, res) => {
   try {
     const { id } = req.params;
     const updatedEmployee = req.body;
-
-    // Call the updateEmployee function to update the employee
     employeeModel.editEmployee(updatedEmployee)
       .then(updatedData => {
-        // Return the updated employee data as the response
         res.json(updatedData);
       })
       .catch(error => {
@@ -68,13 +64,7 @@ app.delete('/api/employee/:id', cors(corsOptions), (req, res) => {
     .catch(error => {
       res.status(500).send(error);
     })
-})
-// app.get('/api/employees', cors(corsOptions), (req, res, next) => {
-//   console.log('/api/employees');
-//   res.setHeader('Content-Type', 'application/json');
-//   res.status(200);
-//   res.send(JSON.stringify(employees, null, 2));
-// })
+});
 
 app.use(express.json());
 

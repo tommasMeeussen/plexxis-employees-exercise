@@ -23,6 +23,7 @@ export default function AddEmployee() {
     const onSubmit = e => {
         e.preventDefault();
 
+        //check if all fields are filled
         if (!name || !code || !profession || !city || !branch) {
             setFormError('Please fill in all required fields');
             return;

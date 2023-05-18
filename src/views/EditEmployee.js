@@ -7,9 +7,6 @@ import Header from '../components/Header';
 import { ChromePicker } from 'react-color';
 import { GlobalContext } from '../context/GlobalState';
 
-
-
-
 export default function EditEmployee() {
     const { updateEmployee } = useContext(GlobalContext);
     const location = useLocation();
@@ -28,7 +25,6 @@ export default function EditEmployee() {
     //Get employee data to be displayed in form
     useEffect(() => {
         if (employee) {
-            console.log(employee);
             setId(employee.id);
             setName(employee.name);
             setCode(employee.code);
